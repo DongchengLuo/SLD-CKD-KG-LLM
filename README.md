@@ -18,7 +18,6 @@ To address this, we developed the **LLM-ReKAP (Large Language Model-Retriever Kn
 
 ### Hardware Requirements
 * **GPU:** NVIDIA GPU highly recommended for `cuml`/`cupy` patient clustering and local LLM deployment.
-* **RAM:** 32GB+ recommended for large cohort processing.
 
 ### Software Setup
 1. Clone the repository:
