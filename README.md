@@ -24,12 +24,12 @@ To address this, we developed the **LLM-ReKAP (Large Language Model-Retriever Kn
 
 ### Software Setup
 1. Clone the repository:
-   ```bash
+```bash
 git clone https://github.com/DongchengLuo/SLD-CKD-KG-LLM.git
 cd SLD-CKD-KG-LLM
 ```
 2. Install the required Python dependencies:
-   ```bash
+```bash
 pip install -r requirements.txt
 
 ```
