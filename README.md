@@ -56,7 +56,7 @@ Clinical Risk Retrieval: Input patient data (JSON) to algorithmically retrieve p
 
 Final Clinical Scoring: Generate an interpretable clinical report detailing projected risk percentages (3, 5, 10, and 15-year horizons) and Combined Model Cutoffs.
 
-(Note: A live demo is available at https://lizzette-periproctic-nondefensibly.ngrok-free.dev using credentials reviewer / MASLD_CKD_KG_LLM)
+(Note: A live demo is available at https://lizzette-periproctic-nondefensibly.ngrok-free.dev)
 
 🧠 Part 2: Under the Hood (Modular Agent Pipeline)
 For developers and researchers performing batch processing or exploring Explainable AI (XAI), the pipeline is divided into specialized scripts. Each script contains a centralized configuration block at the top, allowing you to quickly map paths or environment variables for large-scale cohort execution.
