@@ -1,7 +1,7 @@
 ```markdown
 
 SLD-CKD LLM-ReKAP: Knowledge-Driven Risk Prediction for Incident CKD in Steatotic Liver Disease
-This repository contains the official code, agents, data processing scripts, and interactive Web UI for the paper:
+This repository contains the official code, agents, data processing scripts, and a highly configurable interactive Web UI for the paper:
 "An agentic knowledge graph reasoning framework derives orthogonal risk signals for incident CKD in steatotic liver disease" (Dongcheng Luo, Qi Zhang, et al.)
 
 📖 Overview
@@ -27,37 +27,41 @@ Install the required Python dependencies:
 pip install -r requirements.txt
 ```
 
-Ensure you have an OpenAI-compatible local server (e.g., vLLM, Ollama) running on http://127.0.0.1:8000/v1 for privacy-preserving local LLM inference.
+(Optional but recommended) Ensure you have an OpenAI-compatible local server (e.g., vLLM, Ollama) running for privacy-preserving local LLM inference.
 
 🚀 Part 1: Quick Start (Interactive Web UI)
-For clinicians, end-users, and evaluators, the easiest way to use the SLD-CKD LLM-ReKAP framework is through our unified Web UI. This interface abstracts the complex multi-agent pipeline into an intuitive, end-to-end clinical reasoning system.
+For clinicians, end-users, and evaluators, the framework provides a unified, fully customizable Web UI. You do not need to hardcode paths or API keys into the scripts. Everything is configurable directly within your browser.
 
 Launching the Interface
-Simply run the following command in your terminal:
+Run the following command in your terminal:
 ```bash
-python webui.py
+streamlit run webui.py
 ```
-This will launch a local web server (typically at http://localhost:XXXX).
 
-Features of the Web UI:
-Knowledge Base Management: Upload raw PDF research articles to automatically extract entities and relationships.
+🎛️ Dynamic Configuration via UI:
+Once the UI launches (typically at http://localhost:8501), you can dynamically configure the following from the sidebar and main panels:
 
-Patient Data Entry: Input patient clinical metrics (JSON format) directly into the interface.
+API Endpoints & Keys: Input your Gemini API keys for KG construction, and your OpenAI/Local Endpoint URLs (e.g., http://127.0.0.1:8000/v1) for privacy-preserving retrieval and reasoning.
 
-Evidence Retrieval: View the composite retrieval scores and the specific literature/mechanisms tailored to the patient.
+Model Selection: Flexibly switch between foundation models (e.g., gemini-1.5-pro, moonshotai/kimi-k2-instruct-0905, local Qwen/DeepSeek variants).
 
-Risk Stratification & Reasoning: Receive an interpretable clinical report detailing the projected risk percentages (3, 5, 10, and 15-year horizons) alongside the LLM's Chain-of-Thought reasoning.
+Data Uploads: Upload raw PDFs, structured JSON knowledge bases, or CSV reference standards directly via the file uploader—no path hardcoding required.
+
+Prompt Engineering: View, edit, and fine-tune the system prompts for Entity Retrieval, Relationship Extraction, and Abstract Rating directly in the UI text areas.
+
+Workflow Modules:
+Knowledge Graph Construction: Upload PDFs to extract and normalize biomedical entities and relationships.
+
+Clinical Risk Retrieval: Input patient data (JSON) to algorithmically retrieve patient-specific subgraphs.
+
+Final Clinical Scoring: Generate an interpretable clinical report detailing projected risk percentages (3, 5, 10, and 15-year horizons) and Combined Model Cutoffs.
 
 (Note: A live demo is available at https://lizzette-periproctic-nondefensibly.ngrok-free.dev using credentials reviewer / MASLD_CKD_KG_LLM)
 
 🧠 Part 2: Under the Hood (Modular Agent Pipeline)
-For developers and researchers who wish to inspect, modify, or evaluate specific components of the framework, the pipeline is divided into specialized scripts and agents.
-
-(Note: Ensure all raw data files are placed in the ./data/ directory and ./output/ exists for generated artifacts.)
+For developers and researchers performing batch processing or exploring Explainable AI (XAI), the pipeline is divided into specialized scripts. Each script contains a centralized configuration block at the top, allowing you to quickly map paths or environment variables for large-scale cohort execution.
 
 Phase 1: Knowledge Graph Construction & Refinement
-Utilizes cloud-based LLMs (e.g., Google Gemini) via google-genai to parse unstructured literature into structured networks.
-
 Information_extraction_agent.py: Parses raw PDF research articles into structured JSON triples (entities, relationships, and metadata).
 
 KG_refiner_agent(entity_summarization).py: Consolidates definitions and contexts for individual medical entities.
@@ -65,8 +69,6 @@ KG_refiner_agent(entity_summarization).py: Consolidates definitions and contexts
 KG_refiner_agent(entity_group_summarization).py: Synthesizes functional and semantic entity groups.
 
 Phase 2: Parallel Agentic Retrieval
-Utilizes local LLM instances to match patient phenotypes to the Knowledge Graph while preserving data privacy.
-
 entity_screening_agent.py: Screens and selects the most relevant biological entities for a specific patient profile.
 
 relationship_screening_agent.py: Filters and ranks critical mechanistic relationships tailored to the patient's comorbidities.
@@ -74,15 +76,11 @@ relationship_screening_agent.py: Filters and ranks critical mechanistic relation
 literature_screening_agent.py: Ranks and selects the Top 25/50 most relevant research abstracts based on semantic alignment and Journal Impact Factor.
 
 Phase 3: Population Clustering & Knowledge Synthesis
-Groups similar patient phenotypes for population-scale efficiency.
-
 cluster.py: Calculates composite retrieval scores and utilizes GPU-accelerated RAPIDS cuml to perform K-Means clustering on the patient cohort.
 
 KG_summary_generation.py: Generates comprehensive methodological reports outlining SLD-CKD risk pathways for specific patient clusters.
 
 Phase 4: Predictive Reasoning (LLM-ReKAP)
-Generates final clinical risk assessments and probabilities.
-
 LLM-ReKAP.py (and Consensus Clinical Risk.py): The final Predictor Agent. Synthesizes the generated KG reports and individual patient profiles to output quantitative risk projections and confidence scores.
 
 Phase 5: Interpretability & Explainable AI (XAI)
