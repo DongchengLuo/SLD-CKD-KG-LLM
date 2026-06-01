@@ -24,12 +24,12 @@ To address this, we developed the **LLM-ReKAP (Large Language Model-Retriever Kn
 
 ### Software Setup
 1. Clone the repository:
-   ```
+   ```bash
 git clone https://github.com/DongchengLuo/SLD-CKD-KG-LLM.git
 cd SLD-CKD-KG-LLM
 ```
 2. Install the required Python dependencies:
-   ```
+   ```bash
 pip install -r requirements.txt
 
 ```
@@ -43,7 +43,7 @@ For clinicians, end-users, and evaluators, the framework provides a unified, **f
 
 ### Launching the Interface
 Run the following command in your terminal:
-```
+```bash
 streamlit run webui.py
 ```
 
@@ -59,7 +59,7 @@ Once the UI launches (typically at `http://localhost:8501`), you can dynamically
 2. **Clinical Risk Retrieval:** Input patient data (JSON) to algorithmically retrieve patient-specific subgraphs.
 3. **Final Clinical Scoring:** Generate an interpretable clinical report detailing projected risk percentages (3, 5, 10, and 15-year horizons) and Combined Model Cutoffs.
 
-*(Note: A live demo is available at [https://lizzette-periproctic-nondefensibly.ngrok-free.dev](https://lizzette-periproctic-nondefensibly.ngrok-free.dev))*
+*(Note: A live demo is available at [https://lizzette-periproctic-nondefensibly.ngrok-free.dev](https://lizzette-periproctic-nondefensibly.ngrok-free.dev) using credentials `reviewer` / `MASLD_CKD_KG_LLM`)*
 
 ---
 
@@ -110,3 +110,9 @@ If you find this code or framework useful in your research, please cite our pape
 }
 ```
 
+## ✉️ Contact
+
+For questions regarding the framework, codebase, or data access, please contact:
+**Li Liu, MD, PhD**
+Email: `liuli@i.smu.edu.cn`
+Southern Medical University, Guangzhou, China
