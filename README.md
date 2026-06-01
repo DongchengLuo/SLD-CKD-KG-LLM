@@ -5,8 +5,6 @@
 [![RAPIDS cuML](https://img.shields.io/badge/RAPIDS-cuML-orange.svg)](https://rapids.ai/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the official code, agents, data processing scripts, and a **highly configurable interactive Web UI** for the paper:
-**"An agentic knowledge graph reasoning framework derives orthogonal risk signals for incident CKD in steatotic liver disease"** *(Dongcheng Luo, Qi Zhang, et al.)*
 
 ## 📖 Overview
 
@@ -59,7 +57,7 @@ Once the UI launches (typically at `http://localhost:8501`), you can dynamically
 2. **Clinical Risk Retrieval:** Input patient data (JSON) to algorithmically retrieve patient-specific subgraphs.
 3. **Final Clinical Scoring:** Generate an interpretable clinical report detailing projected risk percentages (3, 5, 10, and 15-year horizons) and Combined Model Cutoffs.
 
-*(Note: A live demo is available at [https://lizzette-periproctic-nondefensibly.ngrok-free.dev](https://lizzette-periproctic-nondefensibly.ngrok-free.dev) using credentials `reviewer` / `MASLD_CKD_KG_LLM`)*
+*(Note: A live demo is available at [https://lizzette-periproctic-nondefensibly.ngrok-free.dev](https://lizzette-periproctic-nondefensibly.ngrok-free.dev))*
 
 ---
 
@@ -110,9 +108,3 @@ If you find this code or framework useful in your research, please cite our pape
 }
 ```
 
-## ✉️ Contact
-
-For questions regarding the framework, codebase, or data access, please contact:
-**Li Liu, MD, PhD**
-Email: `liuli@i.smu.edu.cn`
-Southern Medical University, Guangzhou, China
